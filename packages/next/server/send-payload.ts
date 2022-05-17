@@ -27,9 +27,10 @@ export function setRevalidateHeaders(
       )
     }
 
+    // gamematchweb项目移动端和web端地址相同，因此不能有代理服务器缓存，不然某一端会访问到另一端页面的缓存
     res.setHeader(
       'Cache-Control',
-      `s-maxage=${options.revalidate}, stale-while-revalidate`
+      `private, no-cache, no-store, max-age=0, must-revalidate`
     )
   } else if (options.revalidate === false) {
     res.setHeader('Cache-Control', `s-maxage=31536000, stale-while-revalidate`)
